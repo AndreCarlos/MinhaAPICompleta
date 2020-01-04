@@ -1,0 +1,12 @@
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\bin\Debug\netcoreapp2.2\DevIO.Data.deps.json
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\bin\Debug\netcoreapp2.2\DevIO.Data.dll
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\bin\Debug\netcoreapp2.2\DevIO.Data.pdb
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\bin\Debug\netcoreapp2.2\DevIO.Business.dll
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\bin\Debug\netcoreapp2.2\DevIO.Business.pdb
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\obj\Debug\netcoreapp2.2\DevIO.Data.csprojAssemblyReference.cache
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\obj\Debug\netcoreapp2.2\DevIO.Data.csproj.CoreCompileInputs.cache
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\obj\Debug\netcoreapp2.2\DevIO.Data.AssemblyInfoInputs.cache
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\obj\Debug\netcoreapp2.2\DevIO.Data.AssemblyInfo.cs
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\obj\Debug\netcoreapp2.2\DevIO.Data.csproj.CopyComplete
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\obj\Debug\netcoreapp2.2\DevIO.Data.dll
+G:\_CURSOS\WEB-API\MinhaAPICompleta\src\DevIO.Data\obj\Debug\netcoreapp2.2\DevIO.Data.pdb
