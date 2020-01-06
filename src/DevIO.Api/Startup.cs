@@ -3,7 +3,6 @@ using DevIO.Api.Configuration;
 using DevIO.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,13 +28,26 @@ namespace DevIO.Api
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.WebApiConfig();
 
-            //personalizar a resposta de erros. Suprimi a resposta automatica
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
+            #region Movido para ApiConfig.cs
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            ////personalizar a resposta de erros. Suprimi a resposta automatica
+            //services.Configure<ApiBehaviorOptions>(options =>
+            //{
+            //    options.SuppressModelStateInvalidFilter = true;
+            //});
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("Development",
+            //        builder => builder.AllowAnyOrigin()
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //        .AllowCredentials());
+            //}); 
+            #endregion
 
             services.ResolveDependencies();
         }
@@ -53,8 +65,13 @@ namespace DevIO.Api
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvcConfiguration();
+
+            #region Movido para ApiConfig.cs
+            //app.UseHttpsRedirection();
+            //app.UseCors("Development");
+            //app.UseMvc(); 
+            #endregion
         }
     }
 }

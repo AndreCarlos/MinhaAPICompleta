@@ -2,6 +2,7 @@
 using DevIO.Api.ViewModels;
 using DevIO.Business.Intefaces;
 using DevIO.Business.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,41 @@ namespace DevIO.Api.Controllers
         }
 
 
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Atualizar(Guid id, ProdutoViewModel produtoViewModel)
+        {
+            if (id != produtoViewModel.Id)
+            {
+                NotificarErro("Os ids informados não são iguais!");
+                return CustomResponse();
+            }
+
+            var produtoAtualizacao = await ObterProduto(id);
+            produtoViewModel.Imagem = produtoAtualizacao.Imagem;
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+            if (produtoViewModel.ImagemUpload != null)
+            {
+                var imagemNome = Guid.NewGuid() + "_" + produtoViewModel.Imagem;
+                if (!UploadArquivo(produtoViewModel.ImagemUpload, imagemNome))
+                {
+                    return CustomResponse(ModelState);
+                }
+
+                produtoAtualizacao.Imagem = imagemNome;
+            }
+
+            produtoAtualizacao.Nome = produtoViewModel.Nome;
+            produtoAtualizacao.Descricao = produtoViewModel.Descricao;
+            produtoAtualizacao.Valor = produtoViewModel.Valor;
+            produtoAtualizacao.Ativo = produtoViewModel.Ativo;
+
+            await _produtoService.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
+
+            return CustomResponse(produtoViewModel);
+        }
+
+
         [HttpPost]
         public async Task<ActionResult<ProdutoViewModel>> Adicionar(ProdutoViewModel produtoViewModel)
         {
@@ -58,6 +94,35 @@ namespace DevIO.Api.Controllers
             await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
 
             return CustomResponse(produtoViewModel);
+        }
+
+
+        [HttpPost("Adicionar")]
+        public async Task<ActionResult<ProdutoViewModel>> AdicionarAlternativo(ProdutoImagemViewModel produtoViewModel)
+        {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+            var imgPrefixo = Guid.NewGuid() + "_";
+
+            if (!await UploadArquivoAlternativo(produtoViewModel.ImagemUpload, imgPrefixo))
+            {
+                return CustomResponse(ModelState);
+            }
+
+            produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
+
+            await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+
+            return CustomResponse(produtoViewModel);
+        }
+
+
+        [RequestSizeLimit(40000000)]
+        //[DisableRequestSizeLimit]
+        [HttpPost("imagem")]
+        public ActionResult AdicionarImagem(IFormFile file)
+        {
+            return Ok(file);
         }
 
 
@@ -84,8 +149,8 @@ namespace DevIO.Api.Controllers
 
             var imageDataByteArray = Convert.FromBase64String(arquivo);
 
-            //var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/app/demo-webapi/src/assets", imgNome);
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens", imgNome);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/app/demo-webapi/src/assets", imgNome);
+            //var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens", imgNome);
 
             if (System.IO.File.Exists(filePath))
             {
@@ -99,6 +164,29 @@ namespace DevIO.Api.Controllers
         }
 
 
+        private async Task<bool> UploadArquivoAlternativo(IFormFile arquivo, string imgPrefixo)
+        {
+            if (arquivo == null || arquivo.Length == 0)
+            {
+                NotificarErro("Forneça uma imagem para este produto!");
+                return false;
+            }
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/app/demo-webapi/src/assets", imgPrefixo + arquivo.FileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                NotificarErro("Já existe um arquivo com este nome!");
+                return false;
+            }
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await arquivo.CopyToAsync(stream);
+            }
+
+            return true;
+        }
 
 
         private async Task<ProdutoViewModel> ObterProduto(Guid id)
