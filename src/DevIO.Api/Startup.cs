@@ -31,6 +31,12 @@ namespace DevIO.Api
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            //personalizar a resposta de erros. Suprimi a resposta automatica
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
             services.ResolveDependencies();
         }
 
