@@ -13081,11 +13081,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\_CURSOS\\WEB-API\\MinhaAPICompleta\\src\\DevIO.Api\\DevIO.Api.csproj",
+      "projectUniqueName": "G:\\_CURSOS\\EP-WEBAPI\\MinhaAPICompleta\\src\\DevIO.Api\\DevIO.Api.csproj",
       "projectName": "DevIO.Api",
-      "projectPath": "G:\\_CURSOS\\WEB-API\\MinhaAPICompleta\\src\\DevIO.Api\\DevIO.Api.csproj",
+      "projectPath": "G:\\_CURSOS\\EP-WEBAPI\\MinhaAPICompleta\\src\\DevIO.Api\\DevIO.Api.csproj",
       "packagesPath": "C:\\Users\\Andre\\.nuget\\packages\\",
-      "outputPath": "G:\\_CURSOS\\WEB-API\\MinhaAPICompleta\\src\\DevIO.Api\\obj\\",
+      "outputPath": "G:\\_CURSOS\\EP-WEBAPI\\MinhaAPICompleta\\src\\DevIO.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13104,11 +13104,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "G:\\_CURSOS\\WEB-API\\MinhaAPICompleta\\src\\DevIO.Business\\DevIO.Business.csproj": {
-              "projectPath": "G:\\_CURSOS\\WEB-API\\MinhaAPICompleta\\src\\DevIO.Business\\DevIO.Business.csproj"
+            "G:\\_CURSOS\\EP-WEBAPI\\MinhaAPICompleta\\src\\DevIO.Business\\DevIO.Business.csproj": {
+              "projectPath": "G:\\_CURSOS\\EP-WEBAPI\\MinhaAPICompleta\\src\\DevIO.Business\\DevIO.Business.csproj"
             },
-            "G:\\_CURSOS\\WEB-API\\MinhaAPICompleta\\src\\DevIO.Data\\DevIO.Data.csproj": {
-              "projectPath": "G:\\_CURSOS\\WEB-API\\MinhaAPICompleta\\src\\DevIO.Data\\DevIO.Data.csproj"
+            "G:\\_CURSOS\\EP-WEBAPI\\MinhaAPICompleta\\src\\DevIO.Data\\DevIO.Data.csproj": {
+              "projectPath": "G:\\_CURSOS\\EP-WEBAPI\\MinhaAPICompleta\\src\\DevIO.Data\\DevIO.Data.csproj"
             }
           }
         }
