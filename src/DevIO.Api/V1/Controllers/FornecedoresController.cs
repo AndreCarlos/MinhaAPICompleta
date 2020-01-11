@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 namespace DevIO.Api.Controllers
 {
     [Authorize]
-    [Route("api/fornecedores")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/fornecedores")]
     public class FornecedoresController : MainController
     {
         private readonly IFornecedorRepository _fornecedorRepository;
@@ -24,7 +25,8 @@ namespace DevIO.Api.Controllers
                                       IFornecedorService fornecedorService,
                                       IEnderecoRepository enderecoRepository,
                                       IMapper mapper,
-                                      INotificador notificador) : base(notificador)
+                                      INotificador notificador,
+                                      IUser user) : base(notificador, user)
         {
             _fornecedorRepository = fornecedorRepository;
             _fornecedorService = fornecedorService;
@@ -32,7 +34,7 @@ namespace DevIO.Api.Controllers
             _mapper = mapper;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IEnumerable<FornecedorViewModel>> ObterTodos()
         {
@@ -95,7 +97,7 @@ namespace DevIO.Api.Controllers
         }
         
 
-        [HttpGet("obter-endereco/{id:guid}")]
+        [HttpGet("endereco/{id:guid}")]
         public async Task<EnderecoViewModel> ObterEnderecoPorId(Guid id)
         {
            return _mapper.Map<EnderecoViewModel>(await _enderecoRepository.ObterPorId(id));
@@ -103,7 +105,7 @@ namespace DevIO.Api.Controllers
 
 
         [ClaimsAuthorize("Fornecedor", "Atualizar")]
-        [HttpPut("atualizar-endereco/{id:guid}")]
+        [HttpPut("endereco/{id:guid}")]
         public async Task<IActionResult> AtualizarEndereco(Guid id, EnderecoViewModel enderecoViewModel)
         {
             if (id != enderecoViewModel.Id)
