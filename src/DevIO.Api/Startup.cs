@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DevIO.Api.Configuration;
+using DevIO.Api.Extensions;
 using DevIO.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,13 +36,16 @@ namespace DevIO.Api
 
             services.AddSwaggerConfig();
 
+            services.AddLoggingConfiguration(Configuration);
+
+
+            #region |Legado
             //Generator Swagger
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "My API", Version = "v1" });
-            //});
-
-
+            //}); 
+            #endregion
 
             #region Movido para ApiConfig.cs
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -83,15 +87,23 @@ namespace DevIO.Api
             //Tem de vir antes da MVCConfiguration
             app.UseAuthentication();
 
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseMvcConfiguration();
 
             app.UseSwaggerConfig(provider);
+
+            app.UseLoggingConfiguration();
+
+
+            #region |Legado
 
             //app.UseSwagger();
             //app.UseSwaggerUI(c =>
             //{
             //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            //});
+            //}); 
+            #endregion
 
             #region Movido para ApiConfig.cs
             //app.UseHttpsRedirection();

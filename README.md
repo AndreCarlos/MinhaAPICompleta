@@ -62,3 +62,15 @@ public class ProdutoViewModel
 
 	public string NomeFornecedor { get; set; }
 }
+
+
+
+# MinhaAPICompleta - Executando a API em SelfHosting
+
+1º Opção   No diretório do projeto DevIO.Api, executar no CMD o comando:
+dotnet run --project  DevIO.Api
+
+
+2º  Opção  Criar um publish com a opção Folder.
+No diretório onde foi gerado o publish, abrir com o CMD o diretório e usar o seguinte comando:
+dotnet devio.api.dll
