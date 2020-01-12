@@ -74,3 +74,16 @@ dotnet run --project  DevIO.Api
 2º  Opção  Criar um publish com a opção Folder.
 No diretório onde foi gerado o publish, abrir com o CMD o diretório e usar o seguinte comando:
 dotnet devio.api.dll
+
+
+
+# MinhaAPICompleta - Executando Migration no VS apontando para o ambiente de produção
+
+No projeto onde está o contexto de dados:
+
+1.  $env:ASPNETCORE_ENVIRONMENT='Production'
+2. update-database -Verbose -Context MeuDbcontext
+
+
+No projeto onde está o contexto da API:
+update-database -Verbose -Context ApplicationDbContext

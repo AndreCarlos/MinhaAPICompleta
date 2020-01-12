@@ -4,7 +4,13 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <UserSecretsId>99eec965-1191-416c-a96d-ebebcbb86226</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="appsettings - Copy.Development.json" />
+    <Content Remove="appsettings - Copy.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="2.2.0" />
@@ -30,6 +36,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\imagens\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.Staging.Development.json">
+      <DependentUpon>appsettings.Staging.json</DependentUpon>
+    </Content>
   </ItemGroup>
 
 </Project>
